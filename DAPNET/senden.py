@@ -9,12 +9,12 @@ from requests.auth import HTTPBasicAuth
 #  Daten in Variablen Speichern
 ##############################################################################################################
 
-text = "DL7FL: Das Python Funkruf Script funktioniert."  # Nachrichtentext
+text = ""  # Nachrichtentext bis 80 Zeichen  eingeben
 callsign = ""  # Emfaenger Rufzeichen
-txgroup = "DL-all"  # Sendergruppe
+txgroup = ""  # Sendergruppe zB. DL-all für alle Sender in Deutschland
 login = ""  # DAPNET Benutzername
 passwd = ""  # DAPNET Password
-url = 'http://www.hampager.de:8080/calls'  # Internet
+url = 'http://www.hampager.de:8080/calls'  # versenden uebers Internet
 
 json_string = '''{"text": "''' + text + '''", "callSignNames": ["''' + callsign + '''"], "transmitterGroupNames": ["''' + txgroup + '''"], "emergency": false}'''
 print(json_string)
