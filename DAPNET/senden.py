@@ -11,25 +11,27 @@ from requests.auth import HTTPBasicAuth
 
 # Konstante
 
-login = ""  # DAPNET Benutzername
-passwd = ""  # DAPNET Password
-url = 'http://www.hampager.de:8080/calls'  # versenden uebers Internet
+login = "" #  DAPNET Benutzername Umgebungsvariablen os.getenv
+passwd = ""  #  DAPNET
 
-text = ""  # Nachrichtentext bis 80 Zeichen  eingeben
-rufzeichen = ["DL7FL","DL7FL"]  #  # eins oder mehrere Emfaenger Rufzeichen
-txgroup = "dl-he"  # Sendergruppe zB. DL-all für alle Sender in Deutschland
+
+url = 'http://www.hampager.de:8080/calls'  #  versenden uebers Internet Variable
+
+text = "test test"  #  Nachrichtentext bis 80 Zeichen  eingeben
+rufzeichen = ["DL7FL"]  #,"DH1TZ","DH2FG","DL5ML","DL2FDL","DK8FA","DO2MWW","DK3CW","DL6JJ"]  #  # eins oder mehrere Emfaenger Rufzeichen
+txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
 
 
 ###############################################################################
 # Funktionen definieren
 ###############################################################################
 
-def senden(text, callsign, txgroup, login, passwd, url):
+def senden(text, callsign, txgroup, login, passwd, url): # json modul
 	# print(callsign)
 	json_string = '''{"text": "''' + text + '''", "callSignNames": ["''' + callsign + '''"], "transmitterGroupNames": ["''' + txgroup + '''"], "emergency": false}'''
 	# print(json_string)
-	response = requests.post(url, data=json_string, auth=HTTPBasicAuth(login, passwd))
-	print(response.status_code)
+	response = requests.post(url, data=json_string, auth=HTTPBasicAuth(login, passwd)) # Exception handling
+	print(response.status_code) # return
 
 
 def Rufzeichen_vereinzeln(rufzeichen):  #  Rufzeichen vereinzelt und ruft mit jedem Rufzeichen die Senden Funktion auf.
@@ -40,3 +42,4 @@ def Rufzeichen_vereinzeln(rufzeichen):  #  Rufzeichen vereinzelt und ruft mit je
 
 
 Rufzeichen_vereinzeln(rufzeichen)
+
