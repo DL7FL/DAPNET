@@ -18,7 +18,7 @@ passwd = ""  #  DAPNET
 url = 'http://www.hampager.de:8080/calls'  #  versenden uebers Internet Variable
 
 text = "test test"  #  Nachrichtentext bis 80 Zeichen  eingeben
-rufzeichen = ["DL7FL"]  #,"DH1TZ","DH2FG","DL5ML","DL2FDL","DK8FA","DO2MWW","DK3CW","DL6JJ"]  #  # eins oder mehrere Emfaenger Rufzeichen
+rufzeichen = [""]  # eins oder mehrere Emfaenger Rufzeichen
 txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
 
 
