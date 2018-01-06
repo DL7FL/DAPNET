@@ -4,6 +4,7 @@
 
 import requests
 from requests.auth import HTTPBasicAuth
+import os
 
 ###############################################################################
 #  Daten in Variablen Speichern
@@ -11,14 +12,14 @@ from requests.auth import HTTPBasicAuth
 
 # Konstante
 
-login = "" #  DAPNET Benutzername Umgebungsvariablen os.getenv
-passwd = ""  #  DAPNET
+login = os.getenv('DAPNET_Benutzer') #  DAPNET Benutzername aus Umgebungsvariablen os.getenv
+passwd = os.getenv('DAPNET_Passwort')  #  DAPNET Passwort aus Umgebungsvariablen
 
 
 url = 'http://www.hampager.de:8080/calls'  #  versenden uebers Internet Variable
 
 text = "test test"  #  Nachrichtentext bis 80 Zeichen  eingeben
-rufzeichen = [""]  # eins oder mehrere Emfaenger Rufzeichen
+rufzeichen = ["dl7fl"]  # eins oder mehrere Emfaenger Rufzeichen
 txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
 
 
