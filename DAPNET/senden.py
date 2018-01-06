@@ -19,7 +19,7 @@ passwd = os.getenv('DAPNET_Passwort')  #  DAPNET Passwort aus Umgebungsvariablen
 url = 'http://www.hampager.de:8080/calls'  #  versenden uebers Internet Variable
 
 text = "test test"  #  Nachrichtentext bis 80 Zeichen  eingeben
-rufzeichen = ["dl7fl"]  # eins oder mehrere Emfaenger Rufzeichen
+callsign_list = ["dl7fl"]  # eins oder mehrere Emfaenger Rufzeichen
 txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
 
 
@@ -27,7 +27,7 @@ txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
 # Funktionen definieren
 ###############################################################################
 
-def senden(text, callsign, txgroup, login, passwd, url): # json modul
+def send(text, callsign, txgroup, login, passwd, url): # json modul
 	# print(callsign)
 	json_string = '''{"text": "''' + text + '''", "callSignNames": ["''' + callsign + '''"], "transmitterGroupNames": ["''' + txgroup + '''"], "emergency": false}'''
 	# print(json_string)
@@ -35,12 +35,11 @@ def senden(text, callsign, txgroup, login, passwd, url): # json modul
 	print(response.status_code) # return
 
 
-def Rufzeichen_vereinzeln(rufzeichen):  #  Rufzeichen vereinzelt und ruft mit jedem Rufzeichen die Senden Funktion auf.
-	for callsign in rufzeichen:
+def Single_Callsign(callsign_list):  #  Rufzeichen vereinzelt und ruft mit jedem Rufzeichen die Senden Funktion auf.
+	for callsign in callsign_list:
 		# print(callsign)
+		send(text, callsign, txgroup, login, passwd, url)
 
-		senden(text, callsign, txgroup, login, passwd, url)
 
-
-Rufzeichen_vereinzeln(rufzeichen)
+Single_Callsign(callsign_list)
 
