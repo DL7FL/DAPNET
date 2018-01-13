@@ -27,15 +27,15 @@ txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
 # Funktionen definieren
 ###############################################################################
 
-def send(text, callsign, txgroup, login, passwd, url): # json modul
+def send(text, callsign, txgroup, login, passwd, url): # mit json modul machen
 	# print(callsign)
 	json_string = '''{"text": "''' + text + '''", "callSignNames": ["''' + callsign + '''"], "transmitterGroupNames": ["''' + txgroup + '''"], "emergency": false}'''
 	# print(json_string)
-	response = requests.post(url, data=json_string, auth=HTTPBasicAuth(login, passwd)) # Exception handling
-	print(response.status_code) # return
+	response = requests.post(url, data=json_string, auth=HTTPBasicAuth(login, passwd)) # Exception handling einbauen
+	print(response.status_code) # return von der Funktion
 
 
-def Single_Callsign(callsign_list):  #  Rufzeichen vereinzelt und ruft mit jedem Rufzeichen die Senden Funktion auf.
+def Single_Callsign(callsign_list):  #  Rufzeichen vereinzelt und ruft mit jedem Rufzeichen die Send Funktion auf.
 	for callsign in callsign_list:
 		# print(callsign)
 		send(text, callsign, txgroup, login, passwd, url)
