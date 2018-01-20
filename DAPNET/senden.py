@@ -3,12 +3,12 @@
 ###############################################################################
 
 import os
-import sys
-import requests
-from requests.auth import HTTPBasicAuth
+#import requests
+#from requests.auth import HTTPBasicAuth
 import dapnet
-import json
+#import json
 import logging # -> Logging vom Fehlermeldenung
+import sys
 
 
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s;%(levelname)s;%(message)s")
