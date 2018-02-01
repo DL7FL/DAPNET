@@ -68,3 +68,6 @@ fabric.properties
 .idea/Webscraping.iml
 .idea/misc.xml
 DAPNET/Daten.txt
+.idea/misc.xml
+DAPNET/__pycache__/dapnet.cpython-36.pyc
+DAPNET/.ipynb_checkpoints/Untitled-checkpoint.ipynb
