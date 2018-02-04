@@ -26,7 +26,7 @@ passwd = os.getenv('DAPNET_Passwort')  #  DAPNET Passwort aus Umgebungsvariablen
 
 url = 'http://www.hampager.de:8080/calls'  #  versenden uebers Internet Variable
 
-text = "test cccffm"  #  Nachrichte ntext bis 80 Zeichen  eingeben
+text = "test test"  #  Nachrichte ntext bis 80 Zeichen  eingeben
 callsign_list = ["dl7fl"]  # eins oder mehrere Emfaenger Rufzeichen
 txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
 
@@ -35,4 +35,4 @@ txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
 ##############################################################################
 
 
-dapnet.send(text, callsign_list, login, passwd, url)
+dapnet.send(text, callsign_list, login, passwd, url, txgroup)
