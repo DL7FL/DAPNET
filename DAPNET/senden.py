@@ -20,8 +20,8 @@ logger = logging.getLogger(sys.argv[0])
 
 # Konstante
 
-login = os.getenv('DAPNET_Benutzer') #  DAPNET Benutzername aus Umgebungsvariablen in Pysharm os.getenv oder config datei
-passwd = os.getenv('DAPNET_Passwort')  #  DAPNET Passwort aus Umgebungsvariablen
+login = os.getenv('DAPNET_Benutzer') #  DAPNET Benutzername aus Umgebungsvariablen in Pysharm os.getenv oder config datei yaml / json
+passwd = os.getenv('DAPNET_Passwort')  #  DAPNET Passwort aus Umgebungsvariablen config.py
 
 
 url = 'http://www.hampager.de:8080/calls'  #  versenden uebers Internet Variable
