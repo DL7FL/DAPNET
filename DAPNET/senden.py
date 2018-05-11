@@ -3,10 +3,7 @@
 ###############################################################################
 
 import os
-#import requests
-#from requests.auth import HTTPBasicAuth
 import dapnet
-#import json
 import logging # -> Logging vom Fehlermeldenung
 import sys
 
