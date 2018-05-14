@@ -68,3 +68,4 @@ fabric.properties
 .idea/Webscraping.iml
 .idea/misc.xml
 DAPNET/Daten.txt
+*.ipynb
