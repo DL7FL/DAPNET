@@ -12,6 +12,18 @@ from tkinter import *
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s;%(levelname)s;%(message)s")
 logger = logging.getLogger(sys.argv[0])
 
+#
+login = os.getenv('DAPNET_Benutzer') #  DAPNET Benutzername aus Umgebungsvariablen in Pysharm os.getenv oder config datei yaml / json
+passwd = os.getenv('DAPNET_Passwort')  #  DAPNET Passwort aus Umgebungsvariablen config.py
+
+
+url = 'http://www.hampager.de:8080/calls'  #  versenden uebers Internet Variable
+
+#text = "Dapnet test DL7FL winnau"  #  Nachrichte ntext bis 80 Zeichen  eingebe
+callsign_list = ["dl7fl"] # eins oder mehrere Emfaenger Rufzeichen DL4FLY
+txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
+emergency = False
+
 # GUI Funktionen
 
 # Die folgende Funktion soll ausgeführt werden, wenn
@@ -21,7 +33,9 @@ def button_senden():
     if (entry_text == ""):
         status_label.config(text="Gib zuerst eine Nachricht ein.")
     else:
-        text_nachricht = entry_text + "test"
+        text = entry_text
+        dapnet.send(text, callsign_list, login, passwd, url, txgroup, emergency)
+        text_nachricht = entry_text + "  gesendet"
         status_label.config(text=text_nachricht)
 
  ###############################################################################
@@ -55,7 +69,7 @@ status_label = Label(fenster)
 eingabefeld_nachricht = Entry(fenster, bd=5, width=80)
 
 # Sende Button ruft Funktion button_senden auf
-senden_button = Button(fenster, text="Senden", command=button_senden())
+senden_button = Button(fenster, text="Senden", command=button_senden)
 # Button zum Programm beenden
 exit_button = Button(fenster, text="Beenden", command=fenster.quit)
 

@@ -23,10 +23,10 @@ passwd = os.getenv('DAPNET_Passwort')  #  DAPNET Passwort aus Umgebungsvariablen
 
 url = 'http://www.hampager.de:8080/calls'  #  versenden uebers Internet Variable
 
-text = "Dapnet test DL7FL mit emergency"  #  Nachrichte ntext bis 80 Zeichen  eingebe
+text = "Dapnet test DL7FL winnau"  #  Nachrichte ntext bis 80 Zeichen  eingebe
 callsign_list = ["dl7fl"]  # eins oder mehrere Emfaenger Rufzeichen DL4FLY
 txgroup = "dl-he"  #  Sendergruppe zB. DL-all für alle Sender in Deutschland
-emergency = True
+emergency = False
 ##############################################################################
 # Hauptprogramm
 ##############################################################################
