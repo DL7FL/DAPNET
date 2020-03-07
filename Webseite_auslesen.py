@@ -1,4 +1,4 @@
-import urllib.request
+import urllib.request 
 import re
 
 urls = ['http://google.com' , 'http://cnn.com']
