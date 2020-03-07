@@ -2,6 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import json
 
+## Hachathon HamHack
 
 ###############################################################################
 # Funktionen definieren
