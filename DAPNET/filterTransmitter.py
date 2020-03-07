@@ -48,9 +48,7 @@ def distanceLineSegmentPoint(a, b, p):
 
 def distancePolyPoint(polygon, point):
     d = greatCircleDist(point, polygon[0], R)
-    if 1 == len(polygon): return d
     for i in range(1, len(polygon)):
-        #tmp = distanceLineSegmentPoint(polygon[i-1], polygon[i], point)
         tmp = greatCircleDist(polygon[i], point, R)
         if tmp < d: d = tmp
     return d
@@ -66,14 +64,21 @@ def isWideRange(transmitter):
     return "WIDERANGE" == transmitter["usage"]
 
 def filterTransmitterForMessage(message, transmiters, max_dist=50):
-    points = message["info"][0]["area"][0]["polygon"][0].split(" ")
-    poly = list(map(lambda p: tuple(map(float, p.split(","))), points))
-    return list(filter(isWideRange, filter(lambda t: transmitterNearPoly(poly, t, max_dist), transmiters)))
+    txs = list()
+    for info in message["info"]:
+        for area in info["area"]:
+            if not "polygon" in area:
+                continue;
+            for poly in area["polygon"]:
+                points = poly.split(" ");
+                poly = list(map(lambda p: tuple(map(float, p.split(","))), points))
+                txs += filter(isWideRange, filter(lambda t: transmitterNearPoly(poly, t, max_dist), transmiters))
+    return txs
 
 if __name__== "__main__":
     # transmitters = getTransmitter()
     transmitters = json.load(open("transmitters", "r"))
-    messages     = json.load(open("warning", "r"))
+    messages     = json.load(open("../test.json", "r"))
     for message in messages:
         txs = filterTransmitterForMessage(message, transmitters)
         print("Sent {0} ({1}) to".format(message["identifier"], message["sender"]))
