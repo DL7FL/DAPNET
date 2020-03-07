@@ -8,7 +8,7 @@ unwetterjson = requests.get(url)
 unwetterwarnunglist = json.loads(unwetterjson.text)
 
 print(type(unwetterwarnunglist))
-print(type(unwetterwarnunglist[0]))
+#print(type(unwetterwarnunglist[0]))
 
 for unwetterwarnung in unwetterwarnunglist:
     print(unwetterwarnung)
