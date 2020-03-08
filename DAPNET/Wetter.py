@@ -1,5 +1,3 @@
-### Nur Wettermeldung vom BBK abrufen.
-
 import json
 import requests
 
