@@ -11,13 +11,6 @@ def getTransmitter():
     except Exception:
         return None
 
-def getTransmitter():
-    """ Download and parse list of DAPNET transmitters. """
-    try:
-        return json.load(urlopen("http://www.hampager.de:8080/transmitters"))
-    except Exception:
-        return None
-
 def vecProd(x,y):
     return (x[1]*y[2]-x[2]*y[1], x[2]*y[0]-x[0]*y[2], x[0]*y[1]-x[1]*y[0]);
 
