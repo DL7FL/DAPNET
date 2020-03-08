@@ -7,7 +7,14 @@ R = 6371.0 # Earth's radius
 def getTransmitter():
     """ Download and parse list of DAPNET transmitters. """
     try:
-        return json.loads(urlopen("http://www.hampager.de:8080/transmitters").read())
+        return json.load(urlopen("http://www.hampager.de:8080/transmitters"))
+    except Exception:
+        return None
+
+def getTransmitter():
+    """ Download and parse list of DAPNET transmitters. """
+    try:
+        return json.load(urlopen("http://www.hampager.de:8080/transmitters"))
     except Exception:
         return None
 
@@ -47,21 +54,30 @@ def distanceLineSegmentPoint(a, b, p):
     return greatCircleDist(p, t, R);
 
 def distancePolyPoint(polygon, point):
-    d = greatCircleDist(point, polygon[0], R)
-    for i in range(1, len(polygon)):
-        tmp = greatCircleDist(polygon[i], point, R)
-        if tmp < d: d = tmp
-    return d
+    return min(map(lambda p: greatCircleDist(point, p, R), polygon))
 
 def pointInPoly(polygon, point):
-    return False;
+    if 0 == len(polygon):
+        return False;
+    pX, pY = point
+    minX = min(map(lambda p: p[0], polygon)); maxX = max(map(lambda p: p[0], polygon));
+    minY = min(map(lambda p: p[1], polygon)); maxY = max(map(lambda p: p[1], polygon));
+    if (pX<minX or pX>maxX or pY<minY or pY>maxY):
+        return False
+    inside = False
+    j = len(polygon)-1;
+    for i in range(len(polygon)):
+        if ( (polygon[i][1]>pY) != (polygon[j][1]>pY) ) and (pX < (polygon[j][0]-polygon[i][0])*(pY-polygon[i][1])/(polygon[j][1]-polygon[i][1])+polygon[i][0]):
+            inside = not inside
+        j = i
+    return inside
 
 def transmitterNearPoly(polygon, transmitter, max_dist=50):
     point = (float(transmitter["longitude"]), float(transmitter["latitude"]))
     return (distancePolyPoint(polygon, point) < max_dist) or (pointInPoly(polygon, point))
 
-def isWideRange(transmitter):
-    return "WIDERANGE" == transmitter["usage"]
+def isOnlineAndWideRange(transmitter):
+    return ("WIDERANGE" == transmitter["usage"]) and ("ONLINE"==transmitter["status"])
 
 def filterTransmitterForMessage(message, transmiters, max_dist=50):
     txs = list()
@@ -70,15 +86,15 @@ def filterTransmitterForMessage(message, transmiters, max_dist=50):
             if not "polygon" in area:
                 continue;
             for poly in area["polygon"]:
-                points = poly.split(" ");
-                poly = list(map(lambda p: tuple(map(float, p.split(","))), points))
-                txs += filter(isWideRange, filter(lambda t: transmitterNearPoly(poly, t, max_dist), transmiters))
+                poly = list(map(lambda p: tuple(map(float, p.split(","))), poly.split(" ")))
+                txs += filter(lambda t: transmitterNearPoly(poly, t, max_dist),
+                                filter(isOnlineAndWideRange, transmiters))
     return txs
 
 if __name__== "__main__":
-    # transmitters = getTransmitter()
+    #transmitters = getTransmitter()
     transmitters = json.load(open("transmitters", "r"))
-    messages     = json.load(open("../test.json", "r"))
+    messages     = json.load(open("warning", "r"))
     for message in messages:
         txs = filterTransmitterForMessage(message, transmitters)
         print("Sent {0} ({1}) to".format(message["identifier"], message["sender"]))
