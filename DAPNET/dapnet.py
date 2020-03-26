@@ -16,9 +16,3 @@ def send(text, callsign, login, passwd, url,txgroup="dl-he", emergency = False):
 	response = requests.post(url, data=json_string, auth=HTTPBasicAuth(login, passwd)) # Exception handling einbauen
 	return response.status_code
 
-
-def single_callsign(callsign_list): #  Rufzeichen vereinzelt und ruft mit jedem Rufzeichen die Send Funktion auf.
-	"""Zerlegt die callsign_list in einzelne callsign"""
-	for callsign in callsign_list:
-		send(text, callsign, login, passwd, url)
-	return
