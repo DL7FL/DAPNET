@@ -7,13 +7,6 @@ R = 6371.0 # Earth's radius
 def getTransmitter():
     """ Download and parse list of DAPNET transmitters. """
     try:
-        return js on.load(urlopen("http://www.hampager.de:8080/transmitters"))
-    except Exception:
-        return None
-
-def getTransmitter():
-    """ Download and parse list of DAPNET transmitters. """
-    try:
         return json.load(urlopen("http://www.hampager.de:8080/transmitters"))
     except Exception:
         return None
